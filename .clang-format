@@ -132,7 +132,7 @@ StatementMacros:
 TabWidth:        4
 UseCRLF:         false
 UseTab:          true
-IndentAccessModifiers: true
+IndentAccessModifiers: false
 RemoveBracesLLVM: false
 #InsertNewlineAtEOF: true
 LambdaBodyIndentation: Signature
