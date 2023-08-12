@@ -379,7 +379,7 @@ bool Spell::playerSpellCheck(Player* player) const {
 		return false;
 	}
 
-	if (aggressive && !player->hasFlag(PlayerFlags_t::IgnoreProtectionZone) && player->getZone() == ZONE_PROTECTION) {
+	if (aggressive && !player->hasFlag(PlayerFlags_t::IgnoreProtectionZone) && player->getZoneType() == ZONE_PROTECTION) {
 		player->sendCancelMessage(RETURNVALUE_ACTIONNOTPERMITTEDINPROTECTIONZONE);
 		return false;
 	}
