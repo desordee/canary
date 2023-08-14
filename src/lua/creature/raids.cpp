@@ -121,11 +121,9 @@ void Raids::checkRaids() {
 
 		for (auto it = raidList.begin(), end = raidList.end(); it != end; ++it) {
 			Raid* raid = *it;
-			spdlog::info("Checking raid: {} | now: {} | lasEnd: {} | margin: {}", raid->getName(), now, getLastRaidEnd(), raid->getMargin());
 			if (now >= (getLastRaidEnd() + raid->getMargin())) {
 				auto roll = static_cast<uint32_t>(uniform_random(0, MAX_RAND_RANGE));
 				auto required = static_cast<uint32_t>(MAX_RAND_RANGE * raid->getInterval()) / CHECK_RAIDS_INTERVAL;
-				spdlog::info("allowed to run, rolled {} and required {}", roll, required);
 				auto shouldStart = required >= roll;
 				if (shouldStart) {
 					setRunning(raid);
@@ -227,7 +225,6 @@ bool Raid::loadFromXml(const std::string &filename) {
 }
 
 void Raid::startRaid() {
-	spdlog::info("[raids] Raid {} STARTING", name);
 	RaidEvent* raidEvent = getNextRaidEvent();
 	if (raidEvent) {
 		state = RAIDSTATE_EXECUTING;
@@ -259,7 +256,6 @@ void Raid::resetRaid() {
 	state = RAIDSTATE_IDLE;
 	g_game().raids.setRunning(nullptr);
 	g_game().raids.setLastRaidEnd(OTSYS_TIME());
-	spdlog::info("[raids] Raid {} - FINISHED", name);
 }
 
 void Raid::stopEvents() {
